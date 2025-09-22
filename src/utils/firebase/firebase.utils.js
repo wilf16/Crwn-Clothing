@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 import { use } from "react";
@@ -32,15 +33,6 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-
-// Detect auth state
-onAuthStateChanged(auth, (user) => {
-  if (user != null) {
-    console.log("logged in!");
-  } else {
-    console.log("No user");
-  }
-});
 
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleProvider);
@@ -88,3 +80,8 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   const response = await signInWithEmailAndPassword(auth, email, password);
   return response;
 };
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
