@@ -1,11 +1,21 @@
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
+
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CardDropdown from "../../components/card-dropdown/card-dropdown.component";
+
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+
 import { Outlet, Link } from "react-router";
-import crwnLogo from "../../assets/crown.svg";
+
+import CrwnLogo from "../../assets/crown.svg";
+
 import "./navigation.styles.scss";
+
 const Navigation = () => {
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
 
   const signOutHandler = async () => {
     const response = await signOutUser();
@@ -15,7 +25,7 @@ const Navigation = () => {
     <>
       <div className="navigation">
         <Link className="logo-container" to="/">
-          <img src={crwnLogo} className="logo" alt="Vite logo" />
+          <img src={CrwnLogo} className="logo" alt="Vite logo" />
         </Link>
         <div className="nav-links-container">
           <Link className="nav-link" to="shop">
@@ -30,7 +40,9 @@ const Navigation = () => {
               SIGN IN
             </Link>
           )}
+          <CartIcon />
         </div>
+        {isCartOpen && <CardDropdown />}
       </div>
       <Outlet />
     </>
