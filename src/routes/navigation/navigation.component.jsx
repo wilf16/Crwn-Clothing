@@ -21,6 +21,7 @@ const Navigation = () => {
     const response = await signOutUser();
     console.log("Sign Out: ", response);
   };
+
   return (
     <>
       <div className="navigation">
