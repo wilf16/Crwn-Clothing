@@ -5,9 +5,7 @@ export const setIsCartOpen = (isOpen) =>
   createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isOpen);
 
 export const setCartItems = (items) =>
-  createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
-    cartItems: items,
-  });
+  createAction(CART_ACTION_TYPES.SET_CART_ITEMS, items);
 
 const addCartItem = (cartItems, productToAdd) => {
   const existingCartItem = cartItems.find(
