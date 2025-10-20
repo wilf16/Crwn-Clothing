@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
-import "./sign-up-form.styles.scss";
+import { SignUpContainer } from "./sign-up-form.styles";
+import { signUpStart } from "../../store/user/user.action";
 
 const defaultFormFields = {
   displayName: "",
@@ -14,17 +16,16 @@ const defaultFormFields = {
   confirmPassword: "",
 };
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
-
-  console.log(formFields);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event);
     // confirm password and confirmPassword is the same
     if (password !== confirmPassword) {
       alert("passwords do not match");
@@ -32,14 +33,9 @@ const SignUpForm = () => {
     }
     // see if we authenticated that user with email and password
     try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      await createUserDocumentFromAuth(user, { displayName });
+      dispatch(signUpStart(email, password, displayName));
       resetFormFields();
     } catch (error) {
-      console.log("Create Auth User Error: ", error);
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
       }
@@ -58,7 +54,7 @@ const SignUpForm = () => {
 
   return (
     <>
-      <div className="sign-up-container">
+      <SignUpContainer>
         <h2>Don't have an account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={handleSubmit}>
@@ -96,7 +92,7 @@ const SignUpForm = () => {
           />
           <Button type="submit">Sign Up</Button>
         </form>
-      </div>
+      </SignUpContainer>
     </>
   );
 };

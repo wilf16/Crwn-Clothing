@@ -8,9 +8,12 @@ import Shop from "./routes/shop/shop.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Checkout from "./routes/checkout/checkout.component";
 
+import { checkUserSession } from "./store/user/user.action";
+
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
+  getCurrentUser,
 } from "./utils/firebase/firebase.utils";
 import { setCurrentUser } from "./store/user/user.action";
 
@@ -18,14 +21,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const subscription = onAuthStateChangedListener((user) => {
-      console.log("User: ", user);
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrentUser(user));
-    });
-    return subscription;
+    dispatch(checkUserSession());
   }, []);
 
   return (

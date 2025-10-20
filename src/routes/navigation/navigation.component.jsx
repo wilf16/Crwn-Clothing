@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector";
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CardDropdown from "../../components/card-dropdown/card-dropdown.component";
 
-import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { signOutStart } from "../../store/user/user.action";
 
 import { Outlet } from "react-router";
 
@@ -19,12 +19,12 @@ import {
 } from "./navigation.styles";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
 
   const signOutHandler = async () => {
-    const response = await signOutUser();
-    console.log("Sign Out: ", response);
+    dispatch(signOutStart());
   };
 
   return (
