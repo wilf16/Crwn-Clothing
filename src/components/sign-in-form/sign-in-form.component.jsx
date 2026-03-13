@@ -1,11 +1,14 @@
 import { useState } from "react";
+
+import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
+
 import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+
 import "./sign-in-form.styles.scss";
 
 const defaultFormFields = {
@@ -36,7 +39,16 @@ const SignInForm = () => {
       );
       console.log(response);
       resetFormFields();
-    } catch (error) {}
+    } catch (error) {
+      switch (error.code) {
+        case "auth/invalid-credential":
+          alert("Invalid credentials.");
+          break;
+        default:
+          alert("Something went wrong.");
+          console.log(error);
+      }
+    }
   };
 
   const handleChange = (event) => {
@@ -71,7 +83,11 @@ const SignInForm = () => {
           />
           <div className="buttons-container">
             <Button type="submit">Sign In</Button>
-            <Button buttonType="google" onClick={signInWithGoogle}>
+            <Button
+              type="button"
+              buttonType="google"
+              onClick={signInWithGoogle}
+            >
               Google Sign In
             </Button>
           </div>
