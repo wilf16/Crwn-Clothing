@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import ShoppingIconImage from "../../assets/shopping-bag.svg?react";
+import ShoppingIconSvg from "../../assets/shopping-bag.svg?react";
 
 export const CartIconContainer = styled.div`
   width: 45px;
@@ -12,7 +12,7 @@ export const CartIconContainer = styled.div`
   cursor: pointer;
 `;
 
-export const ShoppingIcon = styled(ShoppingIconImage)`
+export const ShoppingIcon = styled(ShoppingIconSvg)`
   width: 24px;
   height: 24px;
 `;
