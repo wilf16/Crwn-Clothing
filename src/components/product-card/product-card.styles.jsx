@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { InvertedButton } from "../button/button.styles";
+
 export const ProductCardContainer = styled.div`
   width: 100%;
   display: flex;
@@ -13,7 +15,7 @@ export const ProductCardContainer = styled.div`
     object-fit: cover;
     margin-bottom: 5px;
   }
-  button {
+  ${InvertedButton} {
     width: 80%;
     opacity: 0.7;
     position: absolute;
@@ -24,7 +26,7 @@ export const ProductCardContainer = styled.div`
     img {
       opacity: 0.8;
     }
-    button {
+    ${InvertedButton} {
       opacity: 0.85;
       display: flex;
     }
