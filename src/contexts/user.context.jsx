@@ -1,4 +1,4 @@
-import { act, createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import {
   onAuthStateChangedListener,
   createUserDocumentFromAuth,
