@@ -9,13 +9,13 @@ import { store } from "./store/store.js";
 
 import "./index.scss";
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <CartProvider>
-          <App />
-        </CartProvider>
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>,
+  //<StrictMode>
+  <Provider store={store}>
+    <BrowserRouter>
+      <CartProvider>
+        <App />
+      </CartProvider>
+    </BrowserRouter>
+  </Provider>,
+  //</StrictMode>,
 );
