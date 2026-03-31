@@ -1,6 +1,7 @@
-import { useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
-import { CartContext } from "../../contexts/cart.context";
+import { selectCartItems } from "../../store/cart/cart.selector.js";
+import { setCartItems } from "../../store/cart/cart.action.js";
 
 import {
   CheckoutItemContainer,
@@ -12,15 +13,60 @@ import {
   RemoveButton,
 } from "./checkout-item.styles.jsx";
 
+const addCartItem = (cartItems, productToAdd) => {
+  // find if cartItems contains productToAdd
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === productToAdd.id,
+  );
+  // If found, increment quantity
+  if (existingCartItem) {
+    return cartItems.map((cartItem) =>
+      cartItem.id === productToAdd.id
+        ? { ...cartItem, quantity: cartItem.quantity + 1 }
+        : cartItem,
+    );
+  }
+  // return new array with modified cart items/ new cart item
+  return [...cartItems, { ...productToAdd, quantity: 1 }];
+};
+
+const removeCartItem = (cartItems, cartItemToRemove) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === cartItemToRemove.id,
+  );
+
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+  }
+
+  return cartItems.map((cartItem) =>
+    cartItem.id === cartItemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem,
+  );
+};
+
+const clearCartItem = (cartItems, cartItemToClear) =>
+  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+
 const CheckoutItem = ({ cartItem }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const { name, imageUrl, price, quantity } = cartItem;
 
-  const { addItemToCart, removeItemFromCart, clearItemFromCart } =
-    useContext(CartContext);
+  const addItemHandler = () => {
+    const newCartItems = addCartItem(cartItems, cartItem);
+    dispatch(setCartItems(newCartItems));
+  };
 
-  const addItemHandler = () => addItemToCart(cartItem);
-  const removeItemHandler = () => removeItemFromCart(cartItem);
-  const clearItemHandler = () => clearItemFromCart(cartItem);
+  const removeItemHandler = () => {
+    const newCartItems = removeCartItem(cartItems, cartItem);
+    dispatch(setCartItems(newCartItems));
+  };
+  const clearItemHandler = () => {
+    const newCartItems = clearCartItem(cartItems, cartItem);
+    dispatch(setCartItems(newCartItems));
+  };
 
   return (
     <CheckoutItemContainer>
