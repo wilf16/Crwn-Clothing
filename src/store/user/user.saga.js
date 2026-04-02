@@ -3,11 +3,17 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
   getCurrentUser,
   createUserDocumentFromAuth,
+  signOutUser,
 } from "../../utils/firebase/firebase.utils";
 
 import { USER_ACTION_TYPES } from "./user.types";
 
-import { signInSuccess, signInFailed } from "./user.action";
+import {
+  signInSuccess,
+  signInFailed,
+  signOutSuccess,
+  signOutFailed,
+} from "./user.action";
 
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
   try {
@@ -16,6 +22,9 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
       userAuth,
       additionalDetails,
     );
+    console.log(userSnapshot);
+    console.log(userSnapshot.data());
+    yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
     yield put(signInFailed(error));
   }
@@ -31,17 +40,23 @@ export function* isUserAuthenticated() {
   }
 }
 
-export function* onCheckUserSession() {
-  yield takeLatest(
-    USER_ACTION_TYPES.CHECK_USER_SESSION,
-    call(isUserAuthenticated),
-  );
+export function* signOut() {
+  try {
+    yield call(signOutUser);
+    yield put(signOutSuccess(null));
+  } catch (error) {
+    yield put(signOutFailed(error));
+  }
 }
 
-export function* onSignInSuccess() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_IN_SUCCESS);
+export function* onCheckUserSession() {
+  yield takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
+}
+
+export function* onSignOutUser() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT, signOut);
 }
 
 export function* userSaga() {
-  yield all([call(onCheckUserSession)]);
+  yield all([call(onCheckUserSession), call(onSignOutUser)]);
 }
