@@ -11,8 +11,3 @@ export const selectErrorMessage = createSelector(
   [selectorUserReducer],
   (userSlice) => userSlice.errorMessage,
 );
-
-export const selectSignOutError = createSelector(
-  [selectorUserReducer],
-  (userSlice) => userSlice.signOutError,
-);
