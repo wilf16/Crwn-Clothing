@@ -4,7 +4,6 @@ const INITIAL_STATE = {
   currentUser: null,
   isLoading: false,
   errorMessage: null,
-  signOutError: null,
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -18,25 +17,17 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         errorMessage: null,
         signOutError: null,
       };
-    case USER_ACTION_TYPES.SIGN_IN_FAILED:
-      return {
-        ...state,
-        errorMessage: payload,
-      };
-    case USER_ACTION_TYPES.SIGN_UP_FAILED:
-      return {
-        ...state,
-        errorMessage: payload,
-      };
     case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
       return {
         ...state,
         currentUser: null,
       };
+    case USER_ACTION_TYPES.SIGN_IN_FAILED:
+    case USER_ACTION_TYPES.SIGN_UP_FAILED:
     case USER_ACTION_TYPES.SIGN_OUT_FAILED:
       return {
         ...state,
-        signOutError: payload,
+        errorMessage: payload,
       };
     default:
       return state;

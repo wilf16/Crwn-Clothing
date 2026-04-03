@@ -79,6 +79,10 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
+export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
+  yield call(getSnapshotFromUserAuth, user, additionalDetails);
+}
+
 export function* signUp({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield call(
@@ -98,16 +102,12 @@ export function* signUp({ payload: { email, password, displayName } }) {
   }
 }
 
-export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
-  yield call(getSnapshotFromUserAuth, user, additionalDetails);
-}
-
 export function* signOut() {
   try {
     yield call(signOutUser);
-    yield put(signOutSuccess(null));
+    yield put(signOutSuccess());
   } catch (error) {
-    yield put(signOutFailed(error));
+    yield put(signOutFailed("Failed SignOut"));
   }
 }
 
@@ -131,7 +131,7 @@ export function* onSignUpSuccess() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
 }
 
-export function* onSignOutUser() {
+export function* onSignOutStart() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
 
@@ -142,6 +142,6 @@ export function* userSaga() {
     call(onEmailSignInStart),
     call(onSignUpStart),
     call(onSignUpSuccess),
-    call(onSignOutUser),
+    call(onSignOutStart),
   ]);
 }
