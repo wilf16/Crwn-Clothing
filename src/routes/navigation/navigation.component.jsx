@@ -8,7 +8,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { selectCurrentUser } from "../../store/user/user.selector.js";
 import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
 
-import { signOut } from "../../store/user/user.action.js";
+import { signOutStart } from "../../store/user/user.action.js";
 
 import {
   NavigationContainer,
@@ -23,7 +23,7 @@ const Navigation = () => {
   const isCartOpen = useSelector(selectIsCartOpen);
 
   const signOutHandler = () => {
-    dispatch(signOut());
+    dispatch(signOutStart());
   };
 
   return (

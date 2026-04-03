@@ -9,10 +9,7 @@ import {
   emailSignInStart,
 } from "../../store/user/user.action";
 
-import {
-  selectCurrentUser,
-  selectSignInError,
-} from "../../store/user/user.selector";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 
@@ -23,23 +20,11 @@ const defaultFormFields = {
 const SignInForm = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
-  const signInError = useSelector(selectSignInError);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
-  };
-
-  const showError = (error) => {
-    switch (error.code) {
-      case "auth/invalid-credential":
-        alert("Invalid credentials.");
-        break;
-      default:
-        alert("Something went wrong.");
-        console.log(error);
-    }
   };
 
   const signInWithGoogle = () => {
@@ -62,10 +47,6 @@ const SignInForm = () => {
   useEffect(() => {
     if (currentUser) resetFormFields();
   }, [currentUser]);
-
-  useEffect(() => {
-    if (signInError) showError(signInError);
-  }, [signInError]);
 
   return (
     <>

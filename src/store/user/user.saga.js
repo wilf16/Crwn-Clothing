@@ -3,6 +3,7 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 import {
   getCurrentUser,
   createUserDocumentFromAuth,
+  createAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
   signOutUser,
@@ -17,6 +18,21 @@ import {
   signOutFailed,
 } from "./user.action";
 
+export function* receivedAuthenticationError(error) {
+  console.log(error);
+
+  switch (error.code) {
+    case "auth/invalid-credential":
+      yield put(signInFailed("Invalid credentials."));
+      break;
+    case "auth/email-already-in-use":
+      yield put(signInFailed("Cannot create user, email already in use"));
+      break;
+    default:
+      yield put(signInFailed("Something went wrong."));
+  }
+}
+
 export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
   try {
     const userSnapshot = yield call(
@@ -28,7 +44,7 @@ export function* getSnapshotFromUserAuth(userAuth, additionalDetails) {
     console.log(userSnapshot.data());
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
-    yield put(signInFailed(error));
+    yield call(receivedAuthenticationError, error);
   }
 }
 
@@ -38,7 +54,7 @@ export function* isUserAuthenticated() {
     if (!userAuth) return;
     yield call(getSnapshotFromUserAuth, userAuth);
   } catch (error) {
-    yield put(signInFailed(error));
+    yield call(receivedAuthenticationError, error);
   }
 }
 
@@ -47,7 +63,7 @@ export function* signInWithGoogle() {
     const { user } = yield call(signInWithGooglePopup);
     yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
-    yield put(signInFailed(error));
+    yield call(receivedAuthenticationError, error);
   }
 }
 
@@ -60,7 +76,26 @@ export function* signInWithEmail({ payload: { email, password } }) {
     );
     yield call(getSnapshotFromUserAuth, user);
   } catch (error) {
-    yield put(signInFailed(error));
+    yield call(receivedAuthenticationError, error);
+  }
+}
+
+export function* signUp({
+  payload: { email, password, confirmPassword, displayName },
+}) {
+  if (password !== confirmPassword) {
+    yield put(signInFailed("passwords do not match"));
+    return;
+  }
+  try {
+    const { user } = yield call(
+      createAuthUserWithEmailAndPassword,
+      email,
+      password,
+    );
+    yield call(getSnapshotFromUserAuth, user, { displayName });
+  } catch (error) {
+    yield call(receivedAuthenticationError, error);
   }
 }
 
@@ -85,8 +120,12 @@ export function* onEmailSignInStart() {
   yield takeLatest(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, signInWithEmail);
 }
 
+export function* onSignUpStart() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp);
+}
+
 export function* onSignOutUser() {
-  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT, signOut);
+  yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
 
 export function* userSaga() {
@@ -94,6 +133,7 @@ export function* userSaga() {
     call(onCheckUserSession),
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
+    call(onSignUpStart),
     call(onSignOutUser),
   ]);
 }
