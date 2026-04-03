@@ -1,11 +1,15 @@
-import { useState } from "react";
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
+
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 
@@ -14,35 +18,22 @@ const defaultFormFields = {
   password: "",
 };
 const SignInForm = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
-  };
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
+
+  const signInWithGoogle = () => {
+    dispatch(googleSignInStart());
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      resetFormFields();
-    } catch (error) {
-      switch (error.code) {
-        case "auth/invalid-credential":
-          alert("Invalid credentials.");
-          break;
-        default:
-          alert("Something went wrong.");
-          console.log(error);
-      }
-    }
+    dispatch(emailSignInStart(email, password));
   };
 
   const handleChange = (event) => {
@@ -52,6 +43,10 @@ const SignInForm = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (currentUser) resetFormFields();
+  }, [currentUser]);
 
   return (
     <>
