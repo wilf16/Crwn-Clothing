@@ -3,7 +3,7 @@ import { USER_ACTION_TYPES } from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   isLoading: false,
-  authenticationErrorMessage: null,
+  errorMessage: null,
   signOutError: null,
 };
 
@@ -15,13 +15,18 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: payload,
-        authenticationErrorMessage: null,
+        errorMessage: null,
         signOutError: null,
       };
     case USER_ACTION_TYPES.SIGN_IN_FAILED:
       return {
         ...state,
-        authenticationErrorMessage: payload,
+        errorMessage: payload,
+      };
+    case USER_ACTION_TYPES.SIGN_UP_FAILED:
+      return {
+        ...state,
+        errorMessage: payload,
       };
     case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
       return {

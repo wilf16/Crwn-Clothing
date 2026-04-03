@@ -7,9 +7,9 @@ export const selectCurrentUser = createSelector(
   (userSlice) => userSlice.currentUser,
 );
 
-export const selectAuthenticationErrorMessage = createSelector(
+export const selectErrorMessage = createSelector(
   [selectorUserReducer],
-  (userSlice) => userSlice.authenticationErrorMessage,
+  (userSlice) => userSlice.errorMessage,
 );
 
 export const selectSignOutError = createSelector(

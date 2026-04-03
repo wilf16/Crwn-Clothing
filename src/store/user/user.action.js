@@ -10,19 +10,24 @@ export const googleSignInStart = () =>
 export const emailSignInStart = (email, password) =>
   createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password });
 
-export const signUpStart = (email, password, confirmPassword, displayName) =>
-  createAction(USER_ACTION_TYPES.SIGN_UP_START, {
-    email,
-    password,
-    confirmPassword,
-    displayName,
-  });
-
 export const signInSuccess = (user) =>
   createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user);
 
 export const signInFailed = (errorMessage) =>
   createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, errorMessage);
+
+export const signUpStart = (email, password, displayName) =>
+  createAction(USER_ACTION_TYPES.SIGN_UP_START, {
+    email,
+    password,
+    displayName,
+  });
+
+export const signUpSuccess = (user, additionalDetails) =>
+  createAction(USER_ACTION_TYPES.SIGN_UP_SUCCESS, { user, additionalDetails });
+
+export const signUpFailed = (errorMessage) =>
+  createAction(USER_ACTION_TYPES.SIGN_UP_FAILED, errorMessage);
 
 export const signOutStart = () =>
   createAction(USER_ACTION_TYPES.SIGN_OUT_START);

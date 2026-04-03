@@ -14,6 +14,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 import {
   signInSuccess,
   signInFailed,
+  signUpSuccess,
+  signUpFailed,
   signOutSuccess,
   signOutFailed,
 } from "./user.action";
@@ -24,9 +26,6 @@ export function* receivedAuthenticationError(error) {
   switch (error.code) {
     case "auth/invalid-credential":
       yield put(signInFailed("Invalid credentials."));
-      break;
-    case "auth/email-already-in-use":
-      yield put(signInFailed("Cannot create user, email already in use"));
       break;
     default:
       yield put(signInFailed("Something went wrong."));
@@ -80,23 +79,27 @@ export function* signInWithEmail({ payload: { email, password } }) {
   }
 }
 
-export function* signUp({
-  payload: { email, password, confirmPassword, displayName },
-}) {
-  if (password !== confirmPassword) {
-    yield put(signInFailed("passwords do not match"));
-    return;
-  }
+export function* signUp({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield call(
       createAuthUserWithEmailAndPassword,
       email,
       password,
     );
-    yield call(getSnapshotFromUserAuth, user, { displayName });
+    yield put(signUpSuccess(user, { displayName }));
   } catch (error) {
-    yield call(receivedAuthenticationError, error);
+    switch (error.code) {
+      case "auth/email-already-in-use":
+        yield put(signUpFailed("Cannot create user, email already in use"));
+        break;
+      default:
+        yield put(signUpFailed("Something went wrong."));
+    }
   }
+}
+
+export function* signInAfterSignUp({ payload: { user, additionalDetails } }) {
+  yield call(getSnapshotFromUserAuth, user, additionalDetails);
 }
 
 export function* signOut() {
@@ -124,6 +127,10 @@ export function* onSignUpStart() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp);
 }
 
+export function* onSignUpSuccess() {
+  yield takeLatest(USER_ACTION_TYPES.SIGN_UP_SUCCESS, signInAfterSignUp);
+}
+
 export function* onSignOutUser() {
   yield takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
 }
@@ -134,6 +141,7 @@ export function* userSaga() {
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignUpStart),
+    call(onSignUpSuccess),
     call(onSignOutUser),
   ]);
 }
