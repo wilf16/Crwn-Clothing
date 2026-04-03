@@ -32,7 +32,7 @@ const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
 // );
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: middleWares,
+  //middleware: middleWares,
 });
 
 // export const persistor = persistStore(store);
