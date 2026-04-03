@@ -31,22 +31,16 @@ const SignInForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  useEffect(() => {
-    if (currentUser) resetFormFields();
-  }, [currentUser]);
-
-  useEffect(() => {
-    if (signInError) {
-      switch (signInError.code) {
-        case "auth/invalid-credential":
-          alert("Invalid credentials.");
-          break;
-        default:
-          alert("Something went wrong.");
-          console.log(error);
-      }
+  const showError = (error) => {
+    switch (error.code) {
+      case "auth/invalid-credential":
+        alert("Invalid credentials.");
+        break;
+      default:
+        alert("Something went wrong.");
+        console.log(error);
     }
-  }, [signInError]);
+  };
 
   const signInWithGoogle = () => {
     dispatch(googleSignInStart());
@@ -64,6 +58,14 @@ const SignInForm = () => {
       [name]: value,
     });
   };
+
+  useEffect(() => {
+    if (currentUser) resetFormFields();
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (signInError) showError(signInError);
+  }, [signInError]);
 
   return (
     <>
