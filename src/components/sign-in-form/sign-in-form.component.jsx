@@ -1,11 +1,18 @@
-import { useState } from "react";
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from "../../utils/firebase/firebase.utils";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+
+import {
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
+
+import {
+  selectCurrentUser,
+  selectSignInError,
+} from "../../store/user/user.selector";
 
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 
@@ -14,27 +21,23 @@ const defaultFormFields = {
   password: "",
 };
 const SignInForm = () => {
+  const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
+  const signInError = useSelector(selectSignInError);
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
-  };
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
 
-    try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
-      resetFormFields();
-    } catch (error) {
-      switch (error.code) {
+  useEffect(() => {
+    if (currentUser) resetFormFields();
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (signInError) {
+      switch (signInError.code) {
         case "auth/invalid-credential":
           alert("Invalid credentials.");
           break;
@@ -43,6 +46,15 @@ const SignInForm = () => {
           console.log(error);
       }
     }
+  }, [signInError]);
+
+  const signInWithGoogle = () => {
+    dispatch(googleSignInStart());
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    dispatch(emailSignInStart(email, password));
   };
 
   const handleChange = (event) => {

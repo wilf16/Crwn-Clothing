@@ -3,7 +3,8 @@ import { USER_ACTION_TYPES } from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
   isLoading: false,
-  error: null,
+  signInError: null,
+  signOutError: null,
 };
 
 export const userReducer = (state = INITIAL_STATE, action) => {
@@ -18,9 +19,9 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.SIGN_IN_FAILED:
       return {
         ...state,
-        error: payload,
+        signInError: payload,
       };
-    case USER_ACTION_TYPES.SIGN_IN_SUCCESS:
+    case USER_ACTION_TYPES.SIGN_OUT_SUCCESS:
       return {
         ...state,
         currentUser: null,
@@ -28,7 +29,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case USER_ACTION_TYPES.SIGN_OUT_FAILED:
       return {
         ...state,
-        error: payload,
+        signOutError: payload,
       };
     default:
       return state;
