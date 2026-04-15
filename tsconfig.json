@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    // Environment Settings
+    "target": "esnext",
+    "module": "esnext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+
+    "jsx": "react-jsx",
+    // Allow gradual JS -> TS migration
+    "allowJs": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true, // Performs type checking only, does not output JS
+
+    "strict": true,
+    // Stricter Typechecking Options
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    // Style Options
+    // "noImplicitReturns": true,
+    // "noImplicitOverride": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    // "noPropertyAccessFromIndexSignature": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // Recommended Options
+    "resolveJsonModule": true,
+    "noUncheckedSideEffectImports": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
