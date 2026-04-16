@@ -4,6 +4,7 @@
     "target": "esnext",
     "module": "esnext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "types": ["node"],
 
     "jsx": "react-jsx",
     // Allow gradual JS -> TS migration
