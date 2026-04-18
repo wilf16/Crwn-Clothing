@@ -6,14 +6,14 @@ import PaymentForm from "../../components/payment-form/payment-form.component";
 import {
   selectCartItems,
   selectCartTotal,
-} from "../../store/cart/cart.selector.js";
+} from "../../store/cart/cart.selector";
 
 import {
   CheckoutContainer,
   CheckoutHeader,
   HeaderBlock,
   Total,
-} from "./checkout.styles.jsx";
+} from "./checkout.styles.js";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);

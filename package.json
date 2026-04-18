@@ -12,6 +12,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^6.1.0",
     "@stripe/stripe-js": "^9.0.1",
+    "@types/styled-components": "^5.1.36",
     "dotenv": "^17.4.0",
     "firebase": "^12.10.0",
     "react": "^19.1.1",

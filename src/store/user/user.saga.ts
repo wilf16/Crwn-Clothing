@@ -1,5 +1,5 @@
 import { takeLatest, put, all, call } from "typed-redux-saga";
-import type { User } from "firebase/auth";
+import { type User, type AuthError, AuthErrorCodes } from "firebase/auth";
 
 import {
   getCurrentUser,
@@ -25,24 +25,14 @@ import {
   type SignUpStart,
 } from "./user.action";
 
-interface ErrorWithCode extends Error {
-  code: string | number;
-}
-
-function isErrorWithCode(error: unknown): error is ErrorWithCode {
-  return error instanceof Error && "code" in error;
-}
-
 export function* receivedAuthenticationError(error: Error) {
   console.log(error);
-  if (isErrorWithCode(error)) {
-    switch (error.code) {
-      case "auth/invalid-credential":
-        yield* put(signInFailed("Invalid credentials."));
-        break;
-      default:
-        yield* put(signInFailed("Something went wrong."));
-    }
+  switch ((error as AuthError).code) {
+    case AuthErrorCodes.INVALID_LOGIN_CREDENTIALS:
+      yield* put(signInFailed("Invalid credentials."));
+      break;
+    default:
+      yield* put(signInFailed("Something went wrong."));
   }
 }
 
@@ -125,14 +115,12 @@ export function* signUp({
       yield* put(signUpSuccess(user, { displayName }));
     }
   } catch (error) {
-    if (isErrorWithCode(error)) {
-      switch (error.code) {
-        case "auth/email-already-in-use":
-          yield* put(signUpFailed("Cannot create user, email already in use"));
-          break;
-        default:
-          yield* put(signUpFailed("Something went wrong."));
-      }
+    switch ((error as AuthError).code) {
+      case AuthErrorCodes.EMAIL_EXISTS:
+        yield* put(signUpFailed("Cannot create user, email already in use"));
+        break;
+      default:
+        yield* put(signUpFailed("Something went wrong."));
     }
   }
 }
