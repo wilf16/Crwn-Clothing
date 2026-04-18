@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type SubmitEvent, type ChangeEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
@@ -26,7 +26,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       alert("Password does not match");
@@ -35,7 +35,7 @@ const SignUpForm = () => {
     dispatch(signUpStart(email, password, displayName));
   };
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormFields({
       ...formFields,
