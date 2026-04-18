@@ -19,6 +19,7 @@ const CategoriesPreview = () => {
       ) : (
         Object.keys(categoriesMap).map((title) => {
           const products = categoriesMap[title];
+          if (products === undefined) return;
           return (
             <CategoryPreview key={title} title={title} products={products} />
           );
