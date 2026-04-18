@@ -25,15 +25,24 @@ import {
   type SignUpStart,
 } from "./user.action";
 
+interface ErrorWithCode extends Error {
+  code: string | number;
+}
+
+function isErrorWithCode(error: unknown): error is ErrorWithCode {
+  return error instanceof Error && "code" in error;
+}
+
 export function* receivedAuthenticationError(error: Error) {
   console.log(error);
-
-  switch (error.code) {
-    case "auth/invalid-credential":
-      yield* put(signInFailed("Invalid credentials."));
-      break;
-    default:
-      yield* put(signInFailed("Something went wrong."));
+  if (isErrorWithCode(error)) {
+    switch (error.code) {
+      case "auth/invalid-credential":
+        yield* put(signInFailed("Invalid credentials."));
+        break;
+      default:
+        yield* put(signInFailed("Something went wrong."));
+    }
   }
 }
 
@@ -116,12 +125,14 @@ export function* signUp({
       yield* put(signUpSuccess(user, { displayName }));
     }
   } catch (error) {
-    switch (error.code) {
-      case "auth/email-already-in-use":
-        yield* put(signUpFailed("Cannot create user, email already in use"));
-        break;
-      default:
-        yield* put(signUpFailed("Something went wrong."));
+    if (isErrorWithCode(error)) {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          yield* put(signUpFailed("Cannot create user, email already in use"));
+          break;
+        default:
+          yield* put(signUpFailed("Something went wrong."));
+      }
     }
   }
 }
