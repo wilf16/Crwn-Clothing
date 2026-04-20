@@ -28,6 +28,7 @@ const RAW_RUNTIME_STATE =
       [null, {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@apollo/client", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:4.1.7"],\
           ["@eslint/js", "npm:9.35.0"],\
           ["@types/react", "npm:19.1.13"],\
           ["@types/react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.9"],\
@@ -38,6 +39,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:0.4.20"],\
           ["firebase", "npm:12.10.0"],\
           ["globals", "npm:16.4.0"],\
+          ["graphql", "npm:16.13.2"],\
           ["react", "npm:19.1.1"],\
           ["react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.1"],\
           ["react-router", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:7.13.1"],\
@@ -47,6 +49,55 @@ const RAW_RUNTIME_STATE =
           ["vite-plugin-svgr", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:4.5.0"]\
         ],\
         "linkType": "SOFT"\
+      }]\
+    ]],\
+    ["@apollo/client", [\
+      ["npm:4.1.7", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@apollo-client-npm-4.1.7-f55554ad9a-10c0.zip/node_modules/@apollo/client/",\
+        "packageDependencies": [\
+          ["@apollo/client", "npm:4.1.7"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:4.1.7", {\
+        "packageLocation": "./.yarn/__virtual__/@apollo-client-virtual-7a6d112490/7/.yarn/berry/cache/@apollo-client-npm-4.1.7-f55554ad9a-10c0.zip/node_modules/@apollo/client/",\
+        "packageDependencies": [\
+          ["@apollo/client", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:4.1.7"],\
+          ["@graphql-typed-document-node/core", "virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:3.2.0"],\
+          ["@types/graphql", null],\
+          ["@types/graphql-ws", null],\
+          ["@types/react", "npm:19.1.13"],\
+          ["@types/react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.9"],\
+          ["@types/rxjs", null],\
+          ["@types/subscriptions-transport-ws", null],\
+          ["@wry/caches", "npm:1.0.1"],\
+          ["@wry/equality", "npm:0.5.7"],\
+          ["@wry/trie", "npm:0.5.0"],\
+          ["graphql", "npm:16.13.2"],\
+          ["graphql-tag", "virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:2.12.6"],\
+          ["graphql-ws", null],\
+          ["optimism", "npm:0.18.1"],\
+          ["react", "npm:19.1.1"],\
+          ["react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.1"],\
+          ["rxjs", null],\
+          ["subscriptions-transport-ws", null],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/graphql-ws",\
+          "@types/graphql",\
+          "@types/react-dom",\
+          "@types/react",\
+          "@types/rxjs",\
+          "@types/subscriptions-transport-ws",\
+          "graphql-ws",\
+          "graphql",\
+          "react-dom",\
+          "react",\
+          "rxjs",\
+          "subscriptions-transport-ws"\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["@babel/code-frame", [\
@@ -1912,6 +1963,28 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@graphql-typed-document-node/core", [\
+      ["npm:3.2.0", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@graphql-typed-document-node-core-npm-3.2.0-505adb1e90-10c0.zip/node_modules/@graphql-typed-document-node/core/",\
+        "packageDependencies": [\
+          ["@graphql-typed-document-node/core", "npm:3.2.0"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:3.2.0", {\
+        "packageLocation": "./.yarn/__virtual__/@graphql-typed-document-node-core-virtual-c1a06709a8/7/.yarn/berry/cache/@graphql-typed-document-node-core-npm-3.2.0-505adb1e90-10c0.zip/node_modules/@graphql-typed-document-node/core/",\
+        "packageDependencies": [\
+          ["@graphql-typed-document-node/core", "virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:3.2.0"],\
+          ["@types/graphql", null],\
+          ["graphql", "npm:16.13.2"]\
+        ],\
+        "packagePeers": [\
+          "@types/graphql",\
+          "graphql"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@grpc/grpc-js", [\
       ["npm:1.9.15", {\
         "packageLocation": "../../../../../../.yarn/berry/cache/@grpc-grpc-js-npm-1.9.15-ff69e71e58-10c0.zip/node_modules/@grpc/grpc-js/",\
@@ -2948,6 +3021,46 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@wry/caches", [\
+      ["npm:1.0.1", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@wry-caches-npm-1.0.1-45c77e1362-10c0.zip/node_modules/@wry/caches/",\
+        "packageDependencies": [\
+          ["@wry/caches", "npm:1.0.1"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@wry/context", [\
+      ["npm:0.7.4", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@wry-context-npm-0.7.4-0b17b268ac-10c0.zip/node_modules/@wry/context/",\
+        "packageDependencies": [\
+          ["@wry/context", "npm:0.7.4"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@wry/equality", [\
+      ["npm:0.5.7", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@wry-equality-npm-0.5.7-09bfcd77c8-10c0.zip/node_modules/@wry/equality/",\
+        "packageDependencies": [\
+          ["@wry/equality", "npm:0.5.7"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@wry/trie", [\
+      ["npm:0.5.0", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/@wry-trie-npm-0.5.0-fdc79454e2-10c0.zip/node_modules/@wry/trie/",\
+        "packageDependencies": [\
+          ["@wry/trie", "npm:0.5.0"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["abbrev", [\
       ["npm:3.0.1", {\
         "packageLocation": "../../../../../../.yarn/berry/cache/abbrev-npm-3.0.1-a34d600e50-10c0.zip/node_modules/abbrev/",\
@@ -3290,6 +3403,7 @@ const RAW_RUNTIME_STATE =
       ["workspace:.", {\
         "packageLocation": "./",\
         "packageDependencies": [\
+          ["@apollo/client", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:4.1.7"],\
           ["@eslint/js", "npm:9.35.0"],\
           ["@types/react", "npm:19.1.13"],\
           ["@types/react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.9"],\
@@ -3300,6 +3414,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react-refresh", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:0.4.20"],\
           ["firebase", "npm:12.10.0"],\
           ["globals", "npm:16.4.0"],\
+          ["graphql", "npm:16.13.2"],\
           ["react", "npm:19.1.1"],\
           ["react-dom", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:19.1.1"],\
           ["react-router", "virtual:66a38074c01dbe8d4e1c5f31866afe6519c5caf2716b759f13adfda95e4ea400f888a7baebe1f49c1319977e90dfcfa2e68e48add18eea4caaf0cfffe2a2ff07#npm:7.13.1"],\
@@ -3966,6 +4081,38 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["graphql", [\
+      ["npm:16.13.2", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/graphql-npm-16.13.2-dd8254da13-10c0.zip/node_modules/graphql/",\
+        "packageDependencies": [\
+          ["graphql", "npm:16.13.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["graphql-tag", [\
+      ["npm:2.12.6", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/graphql-tag-npm-2.12.6-99a5a7f6de-10c0.zip/node_modules/graphql-tag/",\
+        "packageDependencies": [\
+          ["graphql-tag", "npm:2.12.6"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:2.12.6", {\
+        "packageLocation": "./.yarn/__virtual__/graphql-tag-virtual-4c1bbdfe5b/7/.yarn/berry/cache/graphql-tag-npm-2.12.6-99a5a7f6de-10c0.zip/node_modules/graphql-tag/",\
+        "packageDependencies": [\
+          ["@types/graphql", null],\
+          ["graphql", "npm:16.13.2"],\
+          ["graphql-tag", "virtual:7a6d1124900809f9653b30ff844b0852bbc0108891158f45659fdae17b5ab8c604cbf30b9de42f1e5a5cc48525f0aa5c6a97d389a3d8e8ba149838a9428335ce#npm:2.12.6"],\
+          ["tslib", "npm:2.8.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/graphql",\
+          "graphql"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["has-flag", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../../../../../.yarn/berry/cache/has-flag-npm-4.0.0-32af9f0536-10c0.zip/node_modules/has-flag/",\
@@ -4530,6 +4677,19 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["abbrev", "npm:3.0.1"],\
           ["nopt", "npm:8.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["optimism", [\
+      ["npm:0.18.1", {\
+        "packageLocation": "../../../../../../.yarn/berry/cache/optimism-npm-0.18.1-ff260ca998-10c0.zip/node_modules/optimism/",\
+        "packageDependencies": [\
+          ["@wry/caches", "npm:1.0.1"],\
+          ["@wry/context", "npm:0.7.4"],\
+          ["@wry/trie", "npm:0.5.0"],\
+          ["optimism", "npm:0.18.1"],\
+          ["tslib", "npm:2.8.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5722,16 +5882,16 @@ function convertToBigIntStats(stats) {
     if (Object.hasOwn(stats, key)) {
       const element = stats[key];
       if (typeof element === `number`) {
-        bigintStats[key] = BigInt(element);
+        bigintStats[key] = BigInt(Math.floor(element));
       } else if (nodeUtils__namespace.types.isDate(element)) {
         bigintStats[key] = new Date(element);
       }
     }
   }
-  bigintStats.atimeNs = bigintStats.atimeMs * BigInt(1e6);
-  bigintStats.mtimeNs = bigintStats.mtimeMs * BigInt(1e6);
-  bigintStats.ctimeNs = bigintStats.ctimeMs * BigInt(1e6);
-  bigintStats.birthtimeNs = bigintStats.birthtimeMs * BigInt(1e6);
+  bigintStats.atimeNs = bigintStats.atimeMs * BigInt(1e6) + BigInt(Math.floor(stats.atimeMs % 1 * 1e3)) * BigInt(1e3);
+  bigintStats.mtimeNs = bigintStats.mtimeMs * BigInt(1e6) + BigInt(Math.floor(stats.mtimeMs % 1 * 1e3)) * BigInt(1e3);
+  bigintStats.ctimeNs = bigintStats.ctimeMs * BigInt(1e6) + BigInt(Math.floor(stats.ctimeMs % 1 * 1e3)) * BigInt(1e3);
+  bigintStats.birthtimeNs = bigintStats.birthtimeMs * BigInt(1e6) + BigInt(Math.floor(stats.birthtimeMs % 1 * 1e3)) * BigInt(1e3);
   return bigintStats;
 }
 function areStatsEqual(a, b) {
@@ -8409,28 +8569,40 @@ class FileHandle {
   sync() {
     throw new Error(`Method not implemented.`);
   }
-  async read(bufferOrOptions, offset, length, position) {
+  async read(bufferOrOptions, offsetOrOptions, length, position) {
     try {
       this[kRef](this.read);
       let buffer;
-      if (!Buffer.isBuffer(bufferOrOptions)) {
-        bufferOrOptions ??= {};
-        buffer = bufferOrOptions.buffer ?? Buffer.alloc(16384);
-        offset = bufferOrOptions.offset || 0;
-        length = bufferOrOptions.length ?? buffer.byteLength;
-        position = bufferOrOptions.position ?? null;
+      let offset;
+      if (!ArrayBuffer.isView(bufferOrOptions)) {
+        buffer = bufferOrOptions?.buffer ?? Buffer.alloc(16384);
+        offset = bufferOrOptions?.offset ?? 0;
+        length = bufferOrOptions?.length ?? buffer.byteLength - offset;
+        position = bufferOrOptions?.position ?? null;
+      } else if (typeof offsetOrOptions === `object` && offsetOrOptions !== null) {
+        buffer = bufferOrOptions;
+        offset = offsetOrOptions?.offset ?? 0;
+        length = offsetOrOptions?.length ?? buffer.byteLength - offset;
+        position = offsetOrOptions?.position ?? null;
       } else {
         buffer = bufferOrOptions;
+        offset = offsetOrOptions ?? 0;
+        length ??= 0;
       }
-      offset ??= 0;
-      length ??= 0;
       if (length === 0) {
         return {
           bytesRead: length,
           buffer
         };
       }
-      const bytesRead = await this[kBaseFs].readPromise(this.fd, buffer, offset, length, position);
+      const bytesRead = await this[kBaseFs].readPromise(
+        this.fd,
+        // FIXME: FakeFS should support ArrayBufferViews directly
+        Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer.buffer, buffer.byteOffset, buffer.byteLength),
+        offset,
+        length,
+        position
+      );
       return {
         bytesRead,
         buffer
@@ -10825,7 +10997,8 @@ class ZipFS extends BasePortableFakeFS {
         const entries = Array.from(directoryListing, (name) => {
           return Object.assign(this.statImpl(`lstat`, ppath.join(p, name)), {
             name,
-            path: PortablePath.dot
+            path: PortablePath.dot,
+            parentPath: PortablePath.dot
           });
         });
         for (const entry of entries) {
@@ -10836,7 +11009,8 @@ class ZipFS extends BasePortableFakeFS {
           for (const child of subListing) {
             entries.push(Object.assign(this.statImpl(`lstat`, ppath.join(p, subPath, child)), {
               name: child,
-              path: subPath
+              path: subPath,
+              parentPath: subPath
             }));
           }
         }
@@ -10857,7 +11031,8 @@ class ZipFS extends BasePortableFakeFS {
       return Array.from(directoryListing, (name) => {
         return Object.assign(this.statImpl(`lstat`, ppath.join(p, name)), {
           name,
-          path: void 0
+          path: void 0,
+          parentPath: void 0
         });
       });
     } else {
@@ -11332,6 +11507,7 @@ function applyPatch(pnpapi, opts) {
       const optionNames = new Set(Object.keys(options));
       optionNames.delete(`paths`);
       optionNames.delete(`plugnplay`);
+      optionNames.delete(`conditions`);
       if (optionNames.size > 0) {
         throw makeError(
           ErrorCode.UNSUPPORTED,
@@ -11360,11 +11536,15 @@ function applyPatch(pnpapi, opts) {
       const issuerApi = apiPath !== null ? opts.manager.getApiEntry(apiPath, true).instance : null;
       try {
         if (issuerApi !== null) {
-          resolution = issuerApi.resolveRequest(request, path !== null ? `${path}/` : null);
+          resolution = issuerApi.resolveRequest(request, path !== null ? `${path}/` : null, {
+            conditions: options?.conditions
+          });
         } else {
           if (path === null)
             throw new Error(`Assertion failed: Expected the path to be set`);
-          resolution = originalModuleResolveFilename.call(require$$0.Module, request, module || makeFakeParent(path), isMain);
+          resolution = originalModuleResolveFilename.call(require$$0.Module, request, module || makeFakeParent(path), isMain, {
+            conditions: options?.conditions
+          });
         }
       } catch (error) {
         firstError = firstError || error;
