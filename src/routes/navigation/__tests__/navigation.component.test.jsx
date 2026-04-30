@@ -1,9 +1,26 @@
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 
 import Navigation from "../navigation.component";
 import { renderWithProviders } from "../../../utils/test/test.utils";
+import { signOutStart } from "../../../store/user/user.action";
+
+const { mockDispatch } = vi.hoisted(() => ({
+  mockDispatch: vi.fn(),
+}));
+
+vi.mock("react-redux", async () => {
+  const actual = await vi.importActual("react-redux");
+  return {
+    ...actual,
+    useDispatch: () => mockDispatch,
+  };
+});
 
 describe("Navigation tests", () => {
+  beforeEach(() => {
+    mockDispatch.mockClear();
+  });
+
   test("It should render a Sign in  and not a Sign Out link if there is no currentUser", () => {
     renderWithProviders(<Navigation />, {
       preloadedState: {
@@ -62,5 +79,26 @@ describe("Navigation tests", () => {
 
     const dropdownTextElement = screen.getByText(/your cart is empty/i);
     expect(dropdownTextElement).toBeInTheDocument();
+  });
+
+  test("It should dispatch signOutStart action when clicking on the Sign Out link", async () => {
+    renderWithProviders(<Navigation />, {
+      preloadedState: {
+        user: {
+          currentUser: {},
+        },
+      },
+    });
+
+    const signOutLinkElement = screen.getByText(/sign out/i);
+    expect(signOutLinkElement).toBeInTheDocument();
+
+    await fireEvent.click(signOutLinkElement);
+    expect(mockDispatch).toHaveBeenCalled();
+
+    const signOutAction = signOutStart();
+    expect(mockDispatch).toHaveBeenCalledWith(signOutAction);
+
+    mockDispatch.mockClear();
   });
 });
