@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "test": "vitest",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -33,17 +34,25 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/babel-plugin-macros": "^3",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/redux-logger": "^3.0.13",
     "@vitejs/plugin-react": "^5.0.0",
+    "babel-plugin-macros": "^3.1.0",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.3.0",
+    "jsdom": "^29.1.0",
+    "redux-saga-test-plan": "^4.0.6",
     "typescript": "^6.0.2",
-    "vite": "^7.1.2"
+    "vite": "^7.1.2",
+    "vitest": "^4.1.5"
   }
 }
